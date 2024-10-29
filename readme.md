@@ -16,7 +16,7 @@ pip3 install -e .
 ```
 
 **Original Class** : background(0), kidney(1), tumor(2), cyst(3)
-**changed to background(0), left kidney(1), right kidney(2)**
+** Probably will need to changed to background(0), left kidney(1), right kidney(2)**
 
 # Setting Up a Virtual Environment with MONAI and PyTorch on Windows
 
@@ -85,12 +85,12 @@ The config_template.yaml file includes several sections that control different a
 - net: Network architecture.
   - Defines a 3D UNet with specified spatial dimensions, input/output channels, and layer parameters.
 - train: Training parameters.
-      batch_size: Batch size for training.
-      val_batch_size: Batch size for validation.
-      max_epochs: Maximum number of training epochs.
-      val_interval: Frequency of validation (e.g., every 5 epochs).
-      learning_rate: Initial learning rate for the optimizer.
-      augmentation: A list of transformations applied to the training data.
+  - batch_size: Batch size for training.
+  - val_batch_size: Batch size for validation.
+  - max_epochs: Maximum number of training epochs.
+  - val_interval: Frequency of validation (e.g., every 5 epochs).
+  - learning_rate: Initial learning rate for the optimizer.
+  - augmentation: A list of transformations applied to the training data.
 - valid: Validation parameters.
    - roi_size: Size of the region of interest for sliding window inference.
    - sw_batch_size: Batch size during sliding window inference.
