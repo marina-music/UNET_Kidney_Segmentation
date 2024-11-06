@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 import torch
 
 # load kits23 dataset
-DATA_DIR = './data/kits23/dataset/'
+DATA_DIR = "C:\\Users\\Marina.VALVE\\kits23\\All_50"
 
 ORIGINAL_IMAGES = []
 MASK_IMAGES = []
@@ -18,8 +18,8 @@ for c in CASES:
     if c == 'kits23.json':
         continue
     if len(os.listdir(DATA_DIR+c)) == 2:
-        ORIGINAL_IMAGES.append(os.path.join(DATA_DIR, c, "imaging.nii.gz"))
-        MASK_IMAGES.append(os.path.join(DATA_DIR, c, "segmentation.nii.gz"))
+        ORIGINAL_IMAGES.append(os.path.join(DATA_DIR, c, ".nii.gz"))
+        MASK_IMAGES.append(os.path.join(DATA_DIR, c, ".nrrd"))
 
 df_data = pd.DataFrame({'image': ORIGINAL_IMAGES, 'label': MASK_IMAGES})
 print(f"Number of Data : {len(df_data)}")

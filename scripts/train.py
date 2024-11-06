@@ -41,7 +41,7 @@ def load_transform(class_path, args, kwargs):
 
 def main():
     # Load configuration
-    with open("C:/Users/gabridal/Documents/CT_kidney_segmentation/configs/config_template.yaml", "r") as f:
+    with open("C:\\Users\\Marina.VALVE\\GitHub\\UNET_Kidney_Segmentation\\configs\\config_template.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     # Ensure W&B API key is set and login if needed
@@ -95,7 +95,7 @@ def main():
     # Prepare data from configuration
     # Create the data list by pairing image and label files
     image_files = sorted(glob.glob(os.path.join(config['data']['image'], "*.nii")))  # Adjust extension if needed
-    label_files = sorted(glob.glob(os.path.join(config['data']['label'], "*.nii")))
+    label_files = sorted(glob.glob(os.path.join(config['data']['label'], "*.nrrd")))
 
     assert len(image_files) == len(label_files), "Mismatch between number of images and labels."
 
