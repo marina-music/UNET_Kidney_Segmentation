@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\pydevconsole.py", line 364, in runcode
+    coro = func()
+  File "<input>", line 1, in <module>
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_bundle\pydev_umd.py", line 197, in runfile
+    pydev_imports.execfile(filename, global_vars, local_vars)  # execute the script
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_imps\_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 210, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 100, in main
+    print("image size: ", image_files[0].shape)
+AttributeError: 'str' object has no attribute 'shape'
+Traceback (most recent call last):
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\pydevconsole.py", line 364, in runcode
+    coro = func()
+  File "<input>", line 1, in <module>
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_bundle\pydev_umd.py", line 197, in runfile
+    pydev_imports.execfile(filename, global_vars, local_vars)  # execute the script
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_imps\_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 210, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 100, in main
+    print("image size: ", image_files[0].shape)
+AttributeError: 'str' object has no attribute 'shape'

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 210, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 100, in main
+    print("image size: ", image_files.shape)
+AttributeError: 'list' object has no attribute 'shape'

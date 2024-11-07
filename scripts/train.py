@@ -45,7 +45,7 @@ def main():
         config = yaml.safe_load(f)
 
     # Ensure W&B API key is set and login if needed
-    wandb.login()
+    wandb.login(key='e6cfdc5fbabade5009fbec30beae09b3af4e8048')
 
     # Generate timestamp for unique experiment naming
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -94,8 +94,9 @@ def main():
 
     # Prepare data from configuration
     # Create the data list by pairing image and label files
-    image_files = sorted(glob.glob(os.path.join(config['data']['image'], "*.nii")))  # Adjust extension if needed
+    image_files = sorted(glob.glob(os.path.join(config['data']['image'], "*.nii.gz")))  # Adjust extension if needed
     label_files = sorted(glob.glob(os.path.join(config['data']['label'], "*.nrrd")))
+
 
     assert len(image_files) == len(label_files), "Mismatch between number of images and labels."
 
@@ -103,8 +104,9 @@ def main():
     data = [{"image": img, "label": lbl} for img, lbl in zip(image_files, label_files)]
     assert len(data) > 0, "Data list is empty. Check image and label paths."
 
-    # Split into training and validation files
-    train_files, val_files = data[:-2], data[-2:]
+    # Split into training and validation files #TODO: Implement cross folder validation
+    train_files, val_files = data[:-5], data[-5:]
+
 
     # Parse and apply transformations from config for training and validation
     train_transforms = Compose([
@@ -121,7 +123,7 @@ def main():
 
     # Initialize CacheDataset with training and validation data lists
     train_ds = CacheDataset(
-        data=train_files, 
+        data=train_files,
         transform=train_transforms, 
         cache_rate=config['data']['cache_rate'], 
         num_workers=config['data']['num_workers']
@@ -159,6 +161,7 @@ def main():
         for batch_data in tqdm(train_loader):
             step += 1
             inputs, labels = batch_data["image"].to(device), batch_data["label"].to(device)
+            print(f"inputs shape: {inputs.shape}")
             optimizer.zero_grad()
             outputs = model(inputs)
             loss = loss_function(outputs, labels)

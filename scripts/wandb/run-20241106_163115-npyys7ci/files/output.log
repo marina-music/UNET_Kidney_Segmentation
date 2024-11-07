@@ -1,0 +1,103 @@
+C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\utils\deprecate_utils.py:321: FutureWarning: monai.transforms.croppad.dictionary CropForegroundd.__init__:allow_smaller: Current default value of argument `allow_smaller=True` has been deprecated since version 1.2. It will be changed to `allow_smaller=False` in version 1.5.
+  warn_deprecated(argname, msg, warning_category)
+Loading dataset:   0%|          | 0/45 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\transform.py", line 141, in apply_transform
+    return _apply_transform(transform, data, unpack_items, lazy, overrides, log_stats)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\transform.py", line 98, in _apply_transform
+    return transform(data, lazy=lazy) if isinstance(transform, LazyTrait) else transform(data)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\io\dictionary.py", line 162, in __call__
+    data = self._loader(d[key], reader)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\io\array.py", line 274, in __call__
+    raise RuntimeError(
+RuntimeError: LoadImage cannot find a suitable reader for file: C:\Users\Marina.VALVE\kits23\train_test_split_50\images\imaging_case_00000.nii.gz.
+    Please install the reader libraries, see also the installation instructions:
+    https://docs.monai.io/en/latest/installation.html#installing-the-recommended-dependencies.
+   The current registered: [<monai.data.image_reader.NumpyReader object at 0x0000028A0F784250>, <monai.data.image_reader.PILReader object at 0x0000028A0F784280>].
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\pydevconsole.py", line 364, in runcode
+    coro = func()
+  File "<input>", line 1, in <module>
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_bundle\pydev_umd.py", line 197, in runfile
+    pydev_imports.execfile(filename, global_vars, local_vars)  # execute the script
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_imps\_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 210, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 124, in main
+    train_ds = CacheDataset(
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 829, in __init__
+    self.set_data(data)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 856, in set_data
+    self._cache = self._fill_cache(indices)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 885, in _fill_cache
+    return list(tqdm(p.imap(self._load_cache_item, indices), total=len(indices), desc="Loading dataset"))
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\tqdm\std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "C:\Python38\lib\multiprocessing\pool.py", line 868, in next
+    raise value
+  File "C:\Python38\lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 898, in _load_cache_item
+    item = self.transform(item, end=first_random, threading=True)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\compose.py", line 335, in __call__
+    result = execute_compose(
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\compose.py", line 111, in execute_compose
+    data = apply_transform(
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\transform.py", line 171, in apply_transform
+    raise RuntimeError(f"applying transform {transform}") from e
+RuntimeError: applying transform <monai.transforms.io.dictionary.LoadImaged object at 0x0000028A0E4ECE20>
+Traceback (most recent call last):
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\transform.py", line 141, in apply_transform
+    return _apply_transform(transform, data, unpack_items, lazy, overrides, log_stats)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\transform.py", line 98, in _apply_transform
+    return transform(data, lazy=lazy) if isinstance(transform, LazyTrait) else transform(data)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\io\dictionary.py", line 162, in __call__
+    data = self._loader(d[key], reader)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\io\array.py", line 274, in __call__
+    raise RuntimeError(
+RuntimeError: LoadImage cannot find a suitable reader for file: C:\Users\Marina.VALVE\kits23\train_test_split_50\images\imaging_case_00000.nii.gz.
+    Please install the reader libraries, see also the installation instructions:
+    https://docs.monai.io/en/latest/installation.html#installing-the-recommended-dependencies.
+   The current registered: [<monai.data.image_reader.NumpyReader object at 0x0000028A0F784250>, <monai.data.image_reader.PILReader object at 0x0000028A0F784280>].
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\pydevconsole.py", line 364, in runcode
+    coro = func()
+  File "<input>", line 1, in <module>
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_bundle\pydev_umd.py", line 197, in runfile
+    pydev_imports.execfile(filename, global_vars, local_vars)  # execute the script
+  File "C:\Program Files\JetBrains\PyCharm2024.2.1\plugins\python-ce\helpers\pydev\_pydev_imps\_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 210, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 124, in main
+    train_ds = CacheDataset(
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 829, in __init__
+    self.set_data(data)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 856, in set_data
+    self._cache = self._fill_cache(indices)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 885, in _fill_cache
+    return list(tqdm(p.imap(self._load_cache_item, indices), total=len(indices), desc="Loading dataset"))
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\tqdm\std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "C:\Python38\lib\multiprocessing\pool.py", line 868, in next
+    raise value
+  File "C:\Python38\lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\data\dataset.py", line 898, in _load_cache_item
+    item = self.transform(item, end=first_random, threading=True)
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\compose.py", line 335, in __call__
+    result = execute_compose(
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\compose.py", line 111, in execute_compose
+    data = apply_transform(
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\kitsenv\lib\site-packages\monai\transforms\transform.py", line 171, in apply_transform
+    raise RuntimeError(f"applying transform {transform}") from e
+RuntimeError: applying transform <monai.transforms.io.dictionary.LoadImaged object at 0x0000028A0E4ECE20>

@@ -1,7 +1,7 @@
 import os
 
 def main():
-    data_dir = "C:\\Users\\Marina.VALVE\kits23\\rough_segmentations_50"
+    data_dir = "C:\\Users\\Marina.VALVE\\kits23\\data_unet_labelled"
     output_dir = "C:\\Users\\Marina.VALVE\\kits23\\50_images_labelled"
 
     # Loop through each case directory in data_dir

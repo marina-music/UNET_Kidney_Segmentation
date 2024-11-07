@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 208, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 100, in main
+    assert len(image_files) == len(label_files), "Mismatch between number of images and labels."
+AssertionError: Mismatch between number of images and labels.

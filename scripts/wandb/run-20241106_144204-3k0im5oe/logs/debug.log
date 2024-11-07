@@ -1,0 +1,29 @@
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Current SDK version is 0.18.5
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Configure stats pid to 15628
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Loading settings from C:\Users\Marina.VALVE\.config\wandb\settings
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Loading settings from C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\wandb\settings
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'scripts\\train.py', 'program_abspath': 'C:\\Users\\Marina.VALVE\\GitHub\\UNET_Kidney_Segmentation\\scripts\\train.py', 'program': 'C:\\Users\\Marina.VALVE\\GitHub\\UNET_Kidney_Segmentation\\scripts\\train.py'}
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Applying login settings: {'api_key': '***REDACTED***'}
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Applying login settings: {'api_key': '***REDACTED***'}
+2024-11-06 14:42:04,284 INFO    MainThread:15628 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-11-06 14:42:04,285 INFO    MainThread:15628 [wandb_init.py:_log_setup():534] Logging user logs to C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\wandb\run-20241106_144204-3k0im5oe\logs\debug.log
+2024-11-06 14:42:04,285 INFO    MainThread:15628 [wandb_init.py:_log_setup():535] Logging internal logs to C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\wandb\run-20241106_144204-3k0im5oe\logs\debug-internal.log
+2024-11-06 14:42:04,285 INFO    MainThread:15628 [wandb_init.py:init():621] calling init triggers
+2024-11-06 14:42:04,285 INFO    MainThread:15628 [wandb_init.py:init():628] wandb.init called with sweep_config: {}
+config: {}
+2024-11-06 14:42:04,285 INFO    MainThread:15628 [wandb_init.py:init():671] starting backend
+2024-11-06 14:42:04,285 INFO    MainThread:15628 [wandb_init.py:init():675] sending inform_init request
+2024-11-06 14:42:04,292 INFO    MainThread:15628 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn, using: spawn
+2024-11-06 14:42:04,293 INFO    MainThread:15628 [wandb_init.py:init():688] backend started and connected
+2024-11-06 14:42:04,309 INFO    MainThread:15628 [wandb_init.py:init():783] updated telemetry
+2024-11-06 14:42:04,357 INFO    MainThread:15628 [wandb_init.py:init():816] communicating run to backend with 90.0 second timeout
+2024-11-06 14:42:05,044 ERROR   MainThread:15628 [wandb_init.py:init():842] encountered error: failed to upsert bucket: returned error 403 Forbidden: {"errors":[{"message":"permission denied","path":["upsertBucket"],"extensions":{"code":"PERMISSION_ERROR"}}],"data":{"upsertBucket":null}}
+2024-11-06 14:42:05,044 ERROR   MainThread:15628 [wandb_init.py:init():1266] error in wandb.init()
+Traceback (most recent call last):
+  File "C:\Python38\lib\site-packages\wandb\sdk\wandb_init.py", line 1256, in init
+    return wi.init()
+  File "C:\Python38\lib\site-packages\wandb\sdk\wandb_init.py", line 848, in init
+    raise error
+wandb.errors.errors.CommError: failed to upsert bucket: returned error 403 Forbidden: {"errors":[{"message":"permission denied","path":["upsertBucket"],"extensions":{"code":"PERMISSION_ERROR"}}],"data":{"upsertBucket":null}}
+2024-11-06 14:42:05,070 WARNING MsgRouterThr:15628 [router.py:message_loop():77] message_loop has been closed

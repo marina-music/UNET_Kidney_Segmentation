@@ -1,0 +1,40 @@
+Loading dataset:   0%|          | 0/48 [00:07<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Python38\lib\site-packages\monai\transforms\transform.py", line 102, in apply_transform
+    return _apply_transform(transform, data, unpack_items)
+  File "C:\Python38\lib\site-packages\monai\transforms\transform.py", line 66, in _apply_transform
+    return transform(parameters)
+  File "C:\Python38\lib\site-packages\monai\transforms\io\dictionary.py", line 154, in __call__
+    data = self._loader(d[key], reader)
+  File "C:\Python38\lib\site-packages\monai\transforms\io\array.py", line 274, in __call__
+    img_array, meta_data = reader.get_data(img)
+  File "C:\Python38\lib\site-packages\monai\data\image_reader.py", line 1585, in get_data
+    header[MetaKeys.ORIGINAL_AFFINE] = self._get_affine(i)
+  File "C:\Python38\lib\site-packages\monai\data\image_reader.py", line 1610, in _get_affine
+    direction = img.header["space directions"]
+KeyError: 'space directions'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 208, in <module>
+    main()
+  File "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\scripts\train.py", line 123, in main
+    train_ds = CacheDataset(
+  File "C:\Python38\lib\site-packages\monai\data\dataset.py", line 814, in __init__
+    self.set_data(data)
+  File "C:\Python38\lib\site-packages\monai\data\dataset.py", line 841, in set_data
+    self._cache = self._fill_cache(indices)
+  File "C:\Python38\lib\site-packages\monai\data\dataset.py", line 870, in _fill_cache
+    return list(tqdm(p.imap(self._load_cache_item, indices), total=len(indices), desc="Loading dataset"))
+  File "C:\Python38\lib\site-packages\tqdm\std.py", line 1178, in __iter__
+    for obj in iterable:
+  File "C:\Python38\lib\multiprocessing\pool.py", line 868, in next
+    raise value
+  File "C:\Python38\lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+  File "C:\Python38\lib\site-packages\monai\data\dataset.py", line 884, in _load_cache_item
+    item = apply_transform(_xform, item)
+  File "C:\Python38\lib\site-packages\monai\transforms\transform.py", line 129, in apply_transform
+    raise RuntimeError(f"applying transform {transform}") from e
+RuntimeError: applying transform <monai.transforms.io.dictionary.LoadImaged object at 0x0000018D4BE7B580>

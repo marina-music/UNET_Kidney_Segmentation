@@ -1,20 +1,20 @@
 wandb:
   log_gradients: true  # Log model gradients every few steps
-  entity_name: "marinamusic"
+  entity_name: "marinamusic-queen-s-university"
   project_name: "CT_Calyx_Segmentation"
   experiment_name: "Calyx_Segmentation_Run1"
 
 data:
-  image: "C:\\Users\\Marina.VALVE\\kits23\\train_test_split_50\\images"
-  label: "C:\\Users\\Marina.VALVE\\kits23\\train_test_split_50\\labels"
-  root_dir: "C:\\Users\\Marina.VALVE\\kits23\\train_test_split_50"
+  image: "C:\\Users\\Marina.VALVE\\kits23\\final_for_unet\\images"
+  label: "C:\\Users\\Marina.VALVE\\kits23\\final_for_unet\\labels"
+  root_dir: "C:\\Users\\Marina.VALVE\\kits23\\final_for_unet"
   num_class: 2
   cache_rate: 1.0
   num_workers: 2
 
 log:
   name: "CalyxSegmentationNet"
-  save_dir: "C:\Users\Marina.VALVE\GitHub\UNET_Kidney_Segmentation\weights"
+  save_dir: "C:\\Users\\Marina.VALVE\\GitHub\\UNET_Kidney_Segmentation\\weights"
 
 loss:
   monai.losses.DiceCELoss:
@@ -56,8 +56,8 @@ train:
         args: []
         kwargs:
           keys: ["image"]
-          a_min: -57
-          a_max: 164
+          a_min: -40
+          a_max: 100
           b_min: 0.0
           b_max: 1.0
           clip: true
