@@ -13,6 +13,7 @@ from monai.metrics import DiceMetric
 from monai.inferers import sliding_window_inference
 
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+os.environ['TORCH_USE_CUDA_DSA'] = '1'
 
 # Dynamically load the model based on config prefix
 def load_model_from_config(config):
@@ -94,8 +95,8 @@ def main():
 
     # Prepare data from configuration
     # Create the data list by pairing image and label files
-    image_files = sorted(glob.glob(os.path.join(config['data']['image'], "*.nii.gz")))  # Adjust extension if needed
-    label_files = sorted(glob.glob(os.path.join(config['data']['label'], "*.nrrd")))
+    image_files = sorted(glob.glob(os.path.join(config['data']['image'], "*.nii")))  # Adjust extension if needed
+    label_files = sorted(glob.glob(os.path.join(config['data']['label'], "*.nii")))
 
 
     assert len(image_files) == len(label_files), "Mismatch between number of images and labels."
@@ -164,6 +165,7 @@ def main():
             print(f"inputs shape: {inputs.shape}")
             optimizer.zero_grad()
             outputs = model(inputs)
+            print("labels", torch.max(labels))
             loss = loss_function(outputs, labels)
             loss.backward()
             optimizer.step()
