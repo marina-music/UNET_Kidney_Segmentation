@@ -2,12 +2,12 @@ wandb:
   log_gradients: true  # Log model gradients every few steps
   entity_name: "marinamusic-queen-s-university"
   project_name: "CT_Calyx_Segmentation"
-  experiment_name: "Calyx_Segmentation_Train_for_Mask_Generation"
+  experiment_name: "Calyx_Segmentation_Generate_Segmentation"
 
 data:
-  image: "C:\\Users\\Marina.VALVE\\kits23\\final_for_unet\\images"#"C:\\Users\\Marina.VALVE\\kits23\\7_cases\\images"#
-  label: "C:\\Users\\Marina.VALVE\\kits23\\final_for_unet\\labels"#"C:\\Users\\Marina.VALVE\\kits23\\7_cases\\labels"#
-  root_dir: "C:\\Users\\Marina.VALVE\\kits23\\final_for_unet"#"C:\\Users\\Marina.VALVE\\kits23\\7_cases"#
+  image: "C:\\Users\\Marina.VALVE\\kits23\\7_cases\\images"#"C:\\Users\\Marina.VALVE\\kits23\\final_for_unet_200\\images"  #"C:\\Users\\Marina.VALVE\\kits23\\final_for_unet\\images"
+  label: "C:\\Users\\Marina.VALVE\\kits23\\7_cases\\labels" #"C:\\Users\\Marina.VALVE\\kits23\\final_for_unet_200\\labels"  #"C:\\Users\\Marina.VALVE\\kits23\\final_for_unet\\labels"
+  root_dir: "C:\\Users\\Marina.VALVE\\kits23\\7_cases" #"C:\\Users\\Marina.VALVE\\kits23\\final_for_unet_200"  #"C:\\Users\\Marina.VALVE\\kits23\\final_for_unet"
   num_class: 2
   cache_rate: 1.0
   num_workers: 2
@@ -47,11 +47,11 @@ train:
     - monai.transforms.LoadImaged:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
     - monai.transforms.EnsureChannelFirstd:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
     - monai.transforms.ScaleIntensityRanged:
         args: []
         kwargs:
@@ -73,23 +73,23 @@ train:
     - monai.transforms.CropForegroundd:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
           source_key: "image"
     - monai.transforms.Orientationd:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
           axcodes: "RAS"
     - monai.transforms.Spacingd:
         args: []
         kwargs:
-          keys: ["image", "label"]
-          pixdim: [1.0, 1.0, 1.0]
+          keys: ["image"]
+          pixdim: [1.5, 1.5, 2.0]
           mode: ["bilinear", "nearest"]
     - monai.transforms.SpatialPadd: #ResizeWithPadOrCrop:
         args: [ ]
         kwargs:
-          keys: [ "image", "label" ]
+          keys: [ "image"]
           spatial_size: [160,160,160]
     - monai.transforms.ResizeD:
         args: []
@@ -109,35 +109,35 @@ valid:
     - monai.transforms.LoadImaged:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
     - monai.transforms.EnsureChannelFirstd:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
     - monai.transforms.ScaleIntensityRanged:
         args: []
         kwargs:
           keys: ["image"]
-          a_min: 0 #-57
-          a_max: 255 #164
+          a_min: -57
+          a_max: 164
           b_min: 0.0
           b_max: 1.0
           clip: true
     - monai.transforms.CropForegroundd:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
           source_key: "image"
     - monai.transforms.Orientationd:
         args: []
         kwargs:
-          keys: ["image", "label"]
+          keys: ["image"]
           axcodes: "RAS"
     - monai.transforms.Spacingd:
         args: []
         kwargs:
-          keys: ["image", "label"]
-          pixdim: [1.0, 1.0, 1.0]
-          mode: ["bilinear", "nearest"]
+          keys: ["image"]
+          pixdim: [1.5, 1.5, 2.0]
+          mode: ["bilinear"]
 
 

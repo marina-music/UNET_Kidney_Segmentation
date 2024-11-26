@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 import torch
 
 # load kits23 dataset
-DATA_DIR = "C:\\Users\\Marina.VALVE\\kits23\\All_50"
+DATA_DIR = "C:\\Users\\Marina.VALVE\\kits23\\7_cases_OG_data"#"C:\\Users\\Marina.VALVE\\kits23\\All_50"
 
 ORIGINAL_IMAGES = []
 MASK_IMAGES = []
@@ -30,8 +30,8 @@ train_df, valid_df = train_test_split(df_data[:300], test_size=0.2, random_state
 print(f"number of train set : {len(train_df)}, number of valid set : {len(valid_df)}")
 
 # save compressed dataset to npz file
-# save_dataset(train_df, input='train')
-# save_dataset(valid_df, input='valid')
+#save_dataset(train_df, input='train')
+#save_dataset(valid_df, input='valid')
 
 # load saved data
 # train set

@@ -5,12 +5,17 @@ from tqdm import tqdm
 import wandb
 import torch
 import importlib
+import nibabel as nib
 from datetime import datetime
+import matplotlib.pyplot as plt
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from monai.data import DataLoader, CacheDataset
 from monai.transforms import Compose, AsDiscrete
 from monai.metrics import DiceMetric
 from monai.inferers import sliding_window_inference
+#from sklearn.model_selection import cross_val_score
+#from scipy.spatial.distance import directed_hausdorff
+from print_predictions import inference
 
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 os.environ['TORCH_USE_CUDA_DSA'] = '1'
@@ -39,6 +44,31 @@ def load_transform(class_path, args, kwargs):
     module = importlib.import_module(module_path)
     transform_class = getattr(module, class_name)
     return transform_class(*args, **kwargs)
+
+# Load test set
+def load_test_set(data_dir):
+
+    test_dict = {}
+
+    # Iterate through each subdirectory in the test set directory
+    for case_dir in os.listdir(data_dir):
+        case_path = os.path.join(data_dir, case_dir)
+
+        # Ensure it's a directory and follows the case naming convention
+        if os.path.isdir(case_path) and case_dir.startswith("case_"):
+            # Define the path to the 'imaging.nii' file
+            nii_file_path = os.path.join(case_path, 'imaging.nii')
+
+            if os.path.exists(nii_file_path):
+                # Load the nifti file using nibabel
+                img = nib.load(nii_file_path)
+
+                # Get the image data as a NumPy array
+                img_data = img.get_fdata()
+
+                # Store the NumPy array in the dictionary with the case number as the key
+                test_dict[case_dir] = img_data
+    return test_dict
 
 def main():
     # Load configuration
@@ -107,7 +137,13 @@ def main():
 
     # Split into training and validation files #TODO: Implement cross folder validation
     train_files, val_files = data[:-5], data[-5:]
+    #scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+    #integrate with wandb?
+    #for fold_idx, score in enumerate(scores):
+        #wandb.log({"Fold": fold_idx + 1, "Accuracy": score})
 
+    # Log mean accuracy to wandb
+   #wandb.log({"Mean Accuracy": scores.mean()})
 
     # Parse and apply transformations from config for training and validation
     train_transforms = Compose([
@@ -162,6 +198,14 @@ def main():
         for batch_data in tqdm(train_loader):
             step += 1
             inputs, labels = batch_data["image"].to(device), batch_data["label"].to(device)
+            input_img = inputs[0].detach().cpu().numpy()
+            label_img = labels[0].detach().cpu().numpy()
+            input_img = input_img[:,:,50]
+            label_img = label_img[:,:,50]
+            plt.imshow(input_img[0], cmap='gray')
+            plt.show()
+            plt.imshow(label_img[0], cmap='gray')
+            plt.show()
             print(f"inputs shape: {inputs.shape}")
             optimizer.zero_grad()
             outputs = model(inputs)
@@ -171,6 +215,11 @@ def main():
             optimizer.step()
             epoch_loss += loss.item()
             wandb.log({"train/loss_step": loss.item()})
+            label_img = torch.argmax(outputs[0],dim=0)
+            label_img = label_img.detach().cpu().numpy()
+            label_img = label_img[:, :, 50]
+            plt.imshow(label_img, cmap='gray')
+            plt.show()
         
         # Average epoch loss and log
         epoch_loss /= step
@@ -188,12 +237,27 @@ def main():
                     print(f"val_outputs shape: {val_outputs.shape}")
                     print(f"val_labels shape: {val_labels.shape}")
 
+                    # Calculate the dice score for the current batch
                     dice_metric(y_pred=val_outputs, y=val_labels)
+                    batch_metric = dice_metric.aggregate().item()
+                    dice_metric.reset()
+
+                    # Log the dice score for each batch
+                    wandb.log({"val/dice_metric_batch": batch_metric})
+
+                # Aggregate and log the overall dice metric for the validation epoch
+                dice_metric(y_pred=val_outputs, y=val_labels)
+                metric = dice_metric.aggregate().item()
+                wandb.log({"val/dice_metric_epoch": metric})
+                dice_metric.reset()
+
+
+                """dice_metric(y_pred=val_outputs, y=val_labels)
 
                 # Aggregate and log the dice metric
                 metric = dice_metric.aggregate().item()
                 dice_metric.reset()
-                wandb.log({"val/dice_metric": metric})
+                wandb.log({"val/dice_metric": metric})"""
 
                 # Save best model
                 if metric > best_metric:
@@ -205,8 +269,12 @@ def main():
 
                 print(f"Epoch {epoch + 1}, Mean dice: {metric:.4f}, Best dice: {best_metric:.4f} at epoch {best_metric_epoch}")
 
-    # Log best metric to W&B after training
-    wandb.log({"best_dice_metric": best_metric, "best_metric_epoch": best_metric_epoch})
+        # Log best metric to W&B after training
+        wandb.log({"best_dice_metric": best_metric, "best_metric_epoch": best_metric_epoch})
+    #exp_num = 1
+    ##valid_logs_list = []
+    #test_data = load_test_set("C:\\Users\\Marina.VALVE\\kits23\\test_set")
+    #inference(test_data, exp_num, device)
 
 # Check for the main module
 if __name__ == "__main__":

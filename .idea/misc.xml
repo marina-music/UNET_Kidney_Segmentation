@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="pytorchenv" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8 (UNET_Kidney_Segmentation) (2)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="kidneyenv" project-jdk-type="Python SDK" />
 </project>
